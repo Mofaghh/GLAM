@@ -9,13 +9,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
+  <script>
+    (function () {
+      try {
+        var e = document.documentElement, t = localStorage.getItem('m-theme');
+        if (t === 'light') { e.setAttribute('data-theme', 'light'); e.style.backgroundColor = 'var(--m-bg, #F2F3F1)'; }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <header class="top">
     <div class="top-inner wrap">
       <a class="logo" href="#top">
-        <img src="logo.webp" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
+        <img src="logo.png" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
         <span class="logo-text">GLAM <span class="sep">СТУДИЯ</span></span>
       </a>
       <nav class="nav">
@@ -24,56 +32,61 @@
         <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Бот</a>
       </nav>
       <div class="top-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему" title="Тёмная / светлая">🌙</button>
-        <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="btn-primary">Заказать</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему" title="Тёмная / светлая">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+        </button>
+        <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--telegram header-cta">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.92 3.04a1.32 1.32 0 0 0-1.36-.18L2.36 10.27a1.32 1.32 0 0 0 .05 2.46l4.13 1.45 2.27 6.95a.99.99 0 0 0 1.71.32l2.7-2.9 4.6 3.35a1.32 1.32 0 0 0 2.09-.8l3.34-15.41a1.32 1.32 0 0 0-.43-1.65zm-3.6 4.04L9.84 14.5l-.36 4.07-1.4-4.28 9.85-7.78a.2.2 0 0 1 .26.06.2.2 0 0 1 .03.16z"></path></svg>
+          Заказать скин
+        </a>
       </div>
     </div>
   </header>
 
   <main>
     <section class="hero">
+      <svg class="hero__deco" viewBox="0 0 360 360" aria-hidden="true" focusable="false">
+        <ellipse cx="180" cy="180" rx="160" ry="58" fill="none" stroke="var(--m-accent)" stroke-opacity=".22" stroke-width="2" />
+        <circle cx="180" cy="180" r="92" fill="color-mix(in srgb, var(--m-accent) 9%, transparent)" stroke="var(--m-accent)" stroke-opacity=".42" stroke-width="3" stroke-dasharray="7 6" />
+        <circle cx="180" cy="180" r="72" fill="none" stroke="var(--m-accent)" stroke-opacity=".3" stroke-width="2" stroke-dasharray="3 7" />
+        <path d="M132 168 q26 -34 60 -12 t46 26" fill="none" stroke="var(--m-accent)" stroke-opacity=".5" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M138 206 q34 22 78 -4" fill="none" stroke="var(--m-accent)" stroke-opacity=".4" stroke-width="2.5" stroke-linecap="round" />
+        <text x="296" y="128" font-size="34" fill="var(--m-accent)" opacity=".55" font-family="Unbounded, sans-serif">₽</text>
+        <text x="44" y="112" font-size="30" fill="var(--m-accent)" opacity=".45" font-family="Unbounded, sans-serif">Я</text>
+        <text x="300" y="258" font-size="28" fill="var(--m-accent)" opacity=".45" font-family="Unbounded, sans-serif">Р</text>
+        <text x="48" y="262" font-size="24" fill="var(--m-accent)" opacity=".35" font-family="Unbounded, sans-serif">Д</text>
+      </svg>
+
       <div class="wrap">
         <h1 class="hero__heading">Новый опыт игры в Minecraft<br />с собственным уникальным скином</h1>
         <p class="hero__lead">Нарисуем образ по фото, арту или описанию — от 89 ₽ за 1–3 дня.</p>
-        <div class="hero__cta">
-          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--primary">Заказать скин</a>
-          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--telegram">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.92 3.04a1.32 1.32 0 0 0-1.36-.18L2.36 10.27a1.32 1.32 0 0 0 .05 2.46l4.13 1.45 2.27 6.95a.99.99 0 0 0 1.71.32l2.7-2.9 4.6 3.35a1.32 1.32 0 0 0 2.09-.8l3.34-15.41a1.32 1.32 0 0 0-.43-1.65zm-3.6 4.04L9.84 14.5l-.36 4.07-1.4-4.28 9.85-7.78a.2.2 0 0 1 .26.06.2.2 0 0 1 .03.16z"></path></svg>
-            Заказать в боте
-          </a>
-        </div>
-        <ul class="hero__trust">
-          <li class="hero__trust-item"><span class="hero__trust-value">12 000+</span><span class="hero__trust-label">работ за 5 лет</span></li>
-          <li class="hero__trust-item"><span class="hero__trust-value">4.9</span><span class="hero__trust-label">352 отзыва</span></li>
-          <li class="hero__trust-item"><span class="hero__trust-value">1–3 дня</span><span class="hero__trust-label">средний срок</span></li>
-        </ul>
 
         <h2 id="services" class="hero__subheading">С чего начнём твою историю?</h2>
         <div class="product-grid">
           <article class="product-card">
             <span class="product-card__badge">Вся студия</span>
-            <img class="product-card__image" src="skin-premium.webp" alt="Премиум скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <img class="product-card__image" src="skin-premium.png" alt="Премиум скин" width="600" height="450" loading="lazy" onerror="this.classList.add('img-missing')" />
             <h3 class="product-card__heading">Премиум скин</h3>
             <p class="product-card__caption">Работают все мейкеры студии. Максимум детализации и доработок.</p>
             <div class="product-card__price">349 ₽</div>
           </article>
           <article class="product-card">
             <span class="product-card__badge">1 мейкер</span>
-            <img class="product-card__image" src="skin-classic.webp" alt="Обычный скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <img class="product-card__image" src="skin-classic.png" alt="Обычный скин" width="600" height="450" loading="lazy" onerror="this.classList.add('img-missing')" />
             <h3 class="product-card__heading">Обычный скин</h3>
             <p class="product-card__caption">Качественный результат по доступной цене.</p>
             <div class="product-card__price">149 ₽</div>
           </article>
           <article class="product-card">
             <span class="product-card__badge">Детали</span>
-            <img class="product-card__image" src="skin-clothes.webp" alt="Одежда на скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <img class="product-card__image" src="skin-clothes.png" alt="Одежда на скин" width="600" height="450" loading="lazy" onerror="this.classList.add('img-missing')" />
             <h3 class="product-card__heading">Одежда на скин</h3>
             <p class="product-card__caption">Уникальная одежда поверх твоего скина.</p>
             <div class="product-card__price">119 ₽</div>
           </article>
           <article class="product-card">
             <span class="product-card__badge">Улучшение</span>
-            <img class="product-card__image" src="skin-reshade.webp" alt="Решейд скина" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <img class="product-card__image" src="skin-reshade.png" alt="Решейд скина" width="600" height="450" loading="lazy" onerror="this.classList.add('img-missing')" />
             <h3 class="product-card__heading">Решейд скина</h3>
             <p class="product-card__caption">Переработка и обновление существующего скина.</p>
             <div class="product-card__price">89 ₽</div>
@@ -87,14 +100,14 @@
         <h2 class="section-title">Свежие работы</h2>
         <div class="mk-marquee">
           <div class="mk-marquee-track">
-            <div class="mk-marquee-item"><img src="skin-premium.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-classic.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-clothes.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-reshade.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-premium.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-classic.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-clothes.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
-            <div class="mk-marquee-item"><img src="skin-reshade.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-premium.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-classic.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-clothes.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-reshade.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-premium.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-classic.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-clothes.png" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-reshade.png" alt="" loading="lazy" onerror="this.remove()" /></div>
           </div>
         </div>
       </div>
@@ -106,7 +119,6 @@
           <div class="final-card__bg" aria-hidden="true"></div>
           <h2 class="final-card__heading">Готов? Начнём с твоей идеи</h2>
           <p class="final-card__caption">Опиши образ или пришли референс — остальное сделает художник.</p>
-          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--primary">Заказать скин</a>
         </div>
       </div>
     </section>
@@ -117,13 +129,17 @@
       <div class="mk-footer-grid">
         <div class="mk-footer-brand">
           <span class="logo">
-            <img src="logo.webp" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
+            <img src="logo.png" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
             <span class="logo-text">GLAM <span class="sep">СТУДИЯ</span></span>
           </span>
           <p class="mk-footer-tagline">Студия скинов Minecraft: премиум, обычный, одежда и решейд на заказ.</p>
           <div class="theme-row" role="radiogroup" aria-label="Тема оформления">
-            <button type="button" role="radio" aria-checked="true" aria-label="Тёмная тема" class="mk-theme-btn" data-theme-set="dark">🌙</button>
-            <button type="button" role="radio" aria-checked="false" aria-label="Светлая тема" class="mk-theme-btn" data-theme-set="light">☀️</button>
+            <button type="button" role="radio" aria-checked="true" aria-label="Тёмная тема" class="mk-theme-btn" data-theme-set="dark">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
+            </button>
+            <button type="button" role="radio" aria-checked="false" aria-label="Светлая тема" class="mk-theme-btn" data-theme-set="light">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+            </button>
           </div>
           <div class="mk-footer-copy">© GLAM СТУДИЯ 2026</div>
         </div>
@@ -133,7 +149,7 @@
           <ul class="mk-footer-list">
             <li><a href="#services">Все услуги</a></li>
             <li><a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Бот в Telegram</a></li>
-            <li><a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Поддержка</a></li>
+            <li><a href="https://t.me/mofaghh" target="_blank" rel="noopener">Поддержка</a></li>
           </ul>
         </div>
 
@@ -149,8 +165,8 @@
 
         <div class="mk-footer-cross">
           <h4>Telegram-канал GLAM</h4>
-          <p>Свежие работы, обновления студии и розыгрышки скинов — из первых рук.</p>
-          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="mk-footer-cross-cta">Открыть канал →</a>
+          <p>Свежие работы, обновления студии и розыгрыши скинов — из первых рук.</p>
+          <a href="https://t.me/GlamstudioOf" target="_blank" rel="noopener" class="mk-footer-cross-cta">Открыть канал →</a>
         </div>
       </div>
 
@@ -161,6 +177,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=5"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
