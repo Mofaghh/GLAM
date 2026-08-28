@@ -1,18 +1,38 @@
-const toggle = document.getElementById("themeToggle");
-const root = document.documentElement;
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.mk-theme-btn');
+  var headerToggle = document.getElementById('themeToggle');
 
-function sync() {
-  const isLight = root.getAttribute("data-theme") === "light";
-  toggle.textContent = isLight ? "☀️" : "🌙";
-}
+  function apply(theme) {
+    if (theme === 'light') {
+      root.setAttribute('data-theme', 'light');
+      root.style.backgroundColor = 'var(--m-bg, #F2F3F1)';
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      root.style.backgroundColor = 'var(--m-bg, #161718)';
+    }
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-checked', b.getAttribute('data-theme-set') === theme ? 'true' : 'false');
+    });
+    if (headerToggle) headerToggle.textContent = theme === 'light' ? '☀️' : '🌙';
+  }
 
-const saved = localStorage.getItem("glam-theme");
-if (saved) root.setAttribute("data-theme", saved);
-sync();
+  var saved = null;
+  try { saved = localStorage.getItem('m-theme'); } catch (e) {}
+  if (!saved || saved !== 'light') saved = 'dark';
+  apply(saved);
 
-toggle.addEventListener("click", () => {
-  const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-  root.setAttribute("data-theme", next);
-  localStorage.setItem("glam-theme", next);
-  sync();
-});
+  function setTheme(theme) {
+    apply(theme);
+    try { localStorage.setItem('m-theme', theme); } catch (e) {}
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { setTheme(b.getAttribute('data-theme-set')); });
+  });
+  if (headerToggle) {
+    headerToggle.addEventListener('click', function () {
+      setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    });
+  }
+})();

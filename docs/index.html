@@ -3,96 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GLAM СТУДИЯ — скины Minecraft</title>
-  <meta name="description" content="GLAM СТУДИЯ — фиолетовая студия скин-мейкеров. Премиум, обычный, одежда и решейд скина для Minecraft." />
+  <title>Заказать скин Minecraft — GLAM СТУДИЯ</title>
+  <meta name="description" content="GLAM СТУДИЯ — фиолетовая студия скин-мейкеров. Премиум, обычный, одежда и решейд скина для Minecraft. От 89 ₽, срок 1–3 дня." />
   <meta name="theme-color" content="#161718" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
-  <header class="wrap top">
-    <a class="logo" href="#top">
-      <img src="logo.webp" alt="GLAM" class="logo-img" width="30" height="30" loading="lazy" onerror="this.remove()" />
-      <span class="w">GLAM <span class="sep">СТУДИЯ</span></span>
-    </a>
-    <nav class="nav">
-      <a href="#services">Услуги</a>
-      <a href="#docs">Документы</a>
-      <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Бот</a>
-    </nav>
-    <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему" title="Тёмная / светлая">🌙</button>
+  <header class="top">
+    <div class="top-inner wrap">
+      <a class="logo" href="#top">
+        <img src="logo.webp" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
+        <span class="logo-text">GLAM <span class="sep">СТУДИЯ</span></span>
+      </a>
+      <nav class="nav">
+        <a href="#services">Услуги</a>
+        <a href="#docs">Документы</a>
+        <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Бот</a>
+      </nav>
+      <div class="top-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему" title="Тёмная / светлая">🌙</button>
+        <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="btn-primary">Заказать</a>
+      </div>
+    </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero" id="top">
-      <h1>Уникальный скин Minecraft в стиле GLAM</h1>
-      <p class="lead">Рисуем образ по фото, арту или описанию. Четыре категории под любую задачу — от идеи до готового скина.</p>
-      <ul class="stats">
-        <li><strong>12 000+</strong><span>работ за 5 лет</span></li>
-        <li><strong>4.9</strong><span>352 отзыва</span></li>
-        <li><strong>1–3 дня</strong><span>средний срок</span></li>
-      </ul>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1 class="hero__heading">Новый опыт игры в Minecraft<br />с собственным уникальным скином</h1>
+        <p class="hero__lead">Нарисуем образ по фото, арту или описанию — от 89 ₽ за 1–3 дня.</p>
+        <div class="hero__cta">
+          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--primary">Заказать скин</a>
+          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--telegram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.92 3.04a1.32 1.32 0 0 0-1.36-.18L2.36 10.27a1.32 1.32 0 0 0 .05 2.46l4.13 1.45 2.27 6.95a.99.99 0 0 0 1.71.32l2.7-2.9 4.6 3.35a1.32 1.32 0 0 0 2.09-.8l3.34-15.41a1.32 1.32 0 0 0-.43-1.65zm-3.6 4.04L9.84 14.5l-.36 4.07-1.4-4.28 9.85-7.78a.2.2 0 0 1 .26.06.2.2 0 0 1 .03.16z"></path></svg>
+            Заказать в боте
+          </a>
+        </div>
+        <ul class="hero__trust">
+          <li class="hero__trust-item"><span class="hero__trust-value">12 000+</span><span class="hero__trust-label">работ за 5 лет</span></li>
+          <li class="hero__trust-item"><span class="hero__trust-value">4.9</span><span class="hero__trust-label">352 отзыва</span></li>
+          <li class="hero__trust-item"><span class="hero__trust-value">1–3 дня</span><span class="hero__trust-label">средний срок</span></li>
+        </ul>
+
+        <h2 id="services" class="hero__subheading">С чего начнём твою историю?</h2>
+        <div class="product-grid">
+          <article class="product-card">
+            <span class="product-card__badge">Вся студия</span>
+            <img class="product-card__image" src="skin-premium.webp" alt="Премиум скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <h3 class="product-card__heading">Премиум скин</h3>
+            <p class="product-card__caption">Работают все мейкеры студии. Максимум детализации и доработок.</p>
+            <div class="product-card__price">349 ₽</div>
+          </article>
+          <article class="product-card">
+            <span class="product-card__badge">1 мейкер</span>
+            <img class="product-card__image" src="skin-classic.webp" alt="Обычный скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <h3 class="product-card__heading">Обычный скин</h3>
+            <p class="product-card__caption">Качественный результат по доступной цене.</p>
+            <div class="product-card__price">149 ₽</div>
+          </article>
+          <article class="product-card">
+            <span class="product-card__badge">Детали</span>
+            <img class="product-card__image" src="skin-clothes.webp" alt="Одежда на скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <h3 class="product-card__heading">Одежда на скин</h3>
+            <p class="product-card__caption">Уникальная одежда поверх твоего скина.</p>
+            <div class="product-card__price">119 ₽</div>
+          </article>
+          <article class="product-card">
+            <span class="product-card__badge">Улучшение</span>
+            <img class="product-card__image" src="skin-reshade.webp" alt="Решейд скина" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
+            <h3 class="product-card__heading">Решейд скина</h3>
+            <p class="product-card__caption">Переработка и обновление существующего скина.</p>
+            <div class="product-card__price">89 ₽</div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="services">
-      <h2 class="section-title">Наши услуги</h2>
-      <p class="section-sub">Одна студия — четыре категории. Наведи на карточку, чтобы выделить её.</p>
-      <div class="cards">
-        <article class="card">
-          <img class="card-img" src="skin-premium.webp" alt="Премиум скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
-          <h3>Премиум скин</h3>
-          <div class="price">349 ₽</div>
-          <p>Работают все скин-мейкеры студии одновременно. Бесконечный спектр идей и доработок. Максимальный уровень детализации.</p>
-        </article>
-        <article class="card">
-          <img class="card-img" src="skin-classic.webp" alt="Обычный скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
-          <h3>Обычный скин</h3>
-          <div class="price">149 ₽</div>
-          <p>Индивидуальная проработка скина одним скин-мейкером студии. Качественный результат по доступной цене.</p>
-        </article>
-        <article class="card">
-          <img class="card-img" src="skin-clothes.webp" alt="Одежда на скин" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
-          <h3>Одежда на скин</h3>
-          <div class="price">119 ₽</div>
-          <p>Создание уникальной одежды поверх существующего скина. Детали, аксессуары, стилистика под ваш запрос.</p>
-        </article>
-        <article class="card">
-          <img class="card-img" src="skin-reshade.webp" alt="Решейд скина" width="600" height="600" loading="lazy" onerror="this.classList.add('img-missing')" />
-          <h3>Решейд скина</h3>
-          <div class="price">89 ₽</div>
-          <p>Полная переработка и улучшение существующего скина. Обновление стиля, исправление ошибок, новая жизнь вашего скина.</p>
-        </article>
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">Свежие работы</h2>
+        <div class="mk-marquee">
+          <div class="mk-marquee-track">
+            <div class="mk-marquee-item"><img src="skin-premium.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-classic.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-clothes.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-reshade.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-premium.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-classic.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-clothes.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+            <div class="mk-marquee-item"><img src="skin-reshade.webp" alt="" loading="lazy" onerror="this.remove()" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tail">
+      <div class="wrap">
+        <div class="final-card">
+          <div class="final-card__bg" aria-hidden="true"></div>
+          <h2 class="final-card__heading">Готов? Начнём с твоей идеи</h2>
+          <p class="final-card__caption">Опиши образ или пришли референс — остальное сделает художник.</p>
+          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--primary">Заказать скин</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="wrap" id="docs">
-    <div class="footer-inner">
-      <div>
-        <a class="logo" href="#top">
-          <img src="logo.webp" alt="GLAM" class="logo-img" width="28" height="28" loading="lazy" onerror="this.remove()" />
-          <span class="w">GLAM <span class="sep">СТУДИЯ</span></span>
-        </a>
-        <nav class="footer-docs" style="margin-top:14px">
-          <a href="#">Политика конфиденциальности</a>
-          <a href="#">Пользовательское соглашение</a>
-          <a href="#">Правила заказа</a>
-          <a href="#">Реквизиты</a>
-        </nav>
+  <footer class="mk-footer-m" id="docs">
+    <div class="mk-footer-pad">
+      <div class="mk-footer-grid">
+        <div class="mk-footer-brand">
+          <span class="logo">
+            <img src="logo.webp" alt="GLAM" class="logo-img" width="32" height="32" loading="lazy" onerror="this.remove()" />
+            <span class="logo-text">GLAM <span class="sep">СТУДИЯ</span></span>
+          </span>
+          <p class="mk-footer-tagline">Студия скинов Minecraft: премиум, обычный, одежда и решейд на заказ.</p>
+          <div class="theme-row" role="radiogroup" aria-label="Тема оформления">
+            <button type="button" role="radio" aria-checked="true" aria-label="Тёмная тема" class="mk-theme-btn" data-theme-set="dark">🌙</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="Светлая тема" class="mk-theme-btn" data-theme-set="light">☀️</button>
+          </div>
+          <div class="mk-footer-copy">© GLAM СТУДИЯ 2026</div>
+        </div>
+
+        <div>
+          <h3 class="mk-footer-h">Навигация</h3>
+          <ul class="mk-footer-list">
+            <li><a href="#services">Все услуги</a></li>
+            <li><a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Бот в Telegram</a></li>
+            <li><a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Поддержка</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="mk-footer-h">Документы</h3>
+          <ul class="mk-footer-list">
+            <li><a href="#">Политика конфиденциальности</a></li>
+            <li><a href="#">Пользовательское соглашение</a></li>
+            <li><a href="#">Правила заказа</a></li>
+            <li><a href="#">Реквизиты</a></li>
+          </ul>
+        </div>
+
+        <div class="mk-footer-cross">
+          <h4>Telegram-канал GLAM</h4>
+          <p>Свежие работы, обновления студии и розыгрышки скинов — из первых рук.</p>
+          <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="mk-footer-cross-cta">Открыть канал →</a>
+        </div>
       </div>
-      <div class="footer-contact">
-        <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener">Наш бот: @GLAAAM_BOT</a>
+
+      <div class="mk-footer-disclaimer">
+        GLAM — независимая студия. Проект не связан с Mojang Studios, Microsoft Corporation и Minecraft, не одобрен и не поддерживается ими.
+        Minecraft является товарным знаком Mojang Synergies AB. Прочие названия и бренды принадлежат их владельцам и указаны исключительно для идентификации.
       </div>
     </div>
-    <div class="disclaimer">
-      GLAM — независимая студия. Проект не связан с Mojang Studios, Microsoft Corporation и Minecraft, не одобрен и не поддерживается ими.
-      Minecraft является товарным знаком Mojang Synergies AB. Прочие названия и бренды принадлежат их владельцам и указаны исключительно для идентификации.
-    </div>
-    <div class="copyright">© GLAM СТУДИЯ. Все права защищены.</div>
   </footer>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
