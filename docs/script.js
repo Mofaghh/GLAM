@@ -1,40 +1,18 @@
-const ENDPOINT = "https://glam-0j54.onrender.com/api/order";
+const toggle = document.getElementById("themeToggle");
+const root = document.documentElement;
 
-const form = document.getElementById("orderForm");
-const status = document.getElementById("formStatus");
+function sync() {
+  const isLight = root.getAttribute("data-theme") === "light";
+  toggle.textContent = isLight ? "☀️" : "🌙";
+}
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  status.className = "form-status";
-  status.textContent = "Отправляем заявку...";
+const saved = localStorage.getItem("glam-theme");
+if (saved) root.setAttribute("data-theme", saved);
+sync();
 
-  const payload = {
-    name: form.name.value.trim(),
-    telegram: form.telegram.value.trim().replace(/^@/, ""),
-    service: form.service.value,
-    description: form.description.value.trim(),
-    reference: form.reference.value.trim(),
-  };
-
-  if (!payload.name || !payload.telegram || !payload.description) {
-    status.className = "form-status err";
-    status.textContent = "Заполните имя, Telegram и описание.";
-    return;
-  }
-
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("bad status");
-    status.className = "form-status ok";
-    status.textContent = "Заявка отправлена! Художник свяжется с тобой в Telegram.";
-    form.reset();
-  } catch (err) {
-    status.className = "form-status err";
-    status.textContent =
-      "Не удалось отправить автоматически. Напиши в бота: t.me/GLAAAM_BOT";
-  }
+toggle.addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+  root.setAttribute("data-theme", next);
+  localStorage.setItem("glam-theme", next);
+  sync();
 });
