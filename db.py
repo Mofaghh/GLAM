@@ -4,11 +4,14 @@ from config import SUPABASE_URL, SUPABASE_KEY
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
-def create_order(user_id: int, username: str, description: str, topic_id: int) -> None:
+def create_order(
+    user_id: int, username: str, service_type: str, description: str, topic_id: int
+) -> None:
     """Создать заказ и сохранить привязку к теме форума."""
     supabase.table("orders").insert({
         "user_id": user_id,
         "username": username,
+        "service_type": service_type,
         "description": description,
         "topic_id": topic_id,
         "status": "active",
@@ -36,6 +39,18 @@ def get_order_by_user(user_id: int) -> dict | None:
 def get_active_orders() -> list[dict]:
     """Все активные заказы (для кнопки «Мои заказы»)."""
     result = supabase.table("orders").select("*").eq("status", "active").execute()
+    return result.data
+
+
+def get_user_orders(user_id: int) -> list[dict]:
+    """Все заказы пользователя (история, любой статус), новые сверху."""
+    result = (
+        supabase.table("orders")
+        .select("*")
+        .eq("user_id", user_id)
+        .order("created_at", desc=True)
+        .execute()
+    )
     return result.data
 
 

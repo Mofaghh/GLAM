@@ -35,20 +35,60 @@ dp = Dispatcher(storage=MemoryStorage())
 
 
 class OrderStates(StatesGroup):
+    waiting_service = State()
     waiting_description = State()
 
 
+SERVICES = {
+    "premium": {
+        "label": "Премиум скин",
+        "short": "Премиум",
+        "price": 349,
+        "desc": "Работают все скин-мейкеры студии одновременно. Бесконечный спектр идей и доработок. Максимальный уровень детализации.",
+    },
+    "classic": {
+        "label": "Обычный скин",
+        "short": "Обычный",
+        "price": 149,
+        "desc": "Индивидуальная проработка скина одним скин-мейкером студии. Качественный результат по доступной цене.",
+    },
+    "clothes": {
+        "label": "Одежда на скин",
+        "short": "Одежда",
+        "price": 119,
+        "desc": "Создание уникальной одежды поверх существующего скина. Детали, аксессуары, стилистика под ваш запрос.",
+    },
+    "reshade": {
+        "label": "Решейд скина",
+        "short": "Решейд",
+        "price": 89,
+        "desc": "Полная переработка и улучшение существующего скина. Обновление стиля, исправление ошибок, новая жизнь вашего скина.",
+    },
+}
+
+STUDIO_NAME = "GLAM СТУДИЯ"
+
 main_keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="🟣 Заказать скин")],
-        [KeyboardButton(text="📋 Мои заказы")],
+        [KeyboardButton(text="Заказать услугу")],
+        [KeyboardButton(text="Прайс-лист")],
+        [KeyboardButton(text="Мои заказы")],
     ],
     resize_keyboard=True,
 )
 
+service_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text=f"Премиум скин — {SERVICES['premium']['price']} руб.", callback_data="svc_premium")],
+        [InlineKeyboardButton(text=f"Обычный скин — {SERVICES['classic']['price']} руб.", callback_data="svc_classic")],
+        [InlineKeyboardButton(text=f"Одежда на скин — {SERVICES['clothes']['price']} руб.", callback_data="svc_clothes")],
+        [InlineKeyboardButton(text=f"Решейд скина — {SERVICES['reshade']['price']} руб.", callback_data="svc_reshade")],
+    ]
+)
+
 close_button = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="🔴 Завершить заказ", callback_data="close_order")]
+        [InlineKeyboardButton(text="Завершить заказ", callback_data="close_order")]
     ]
 )
 
@@ -56,49 +96,88 @@ close_button = InlineKeyboardMarkup(
 @dp.message(CommandStart())
 async def cmd_start(message: Message):
     await message.answer(
-        "👋 Привет! Это бот студии скинов.\n"
-        "Нажми кнопку ниже, чтобы оформить заказ.",
+        f"Добро пожаловать в студию {STUDIO_NAME}.\n"
+        "Мы создаём уникальные скины для Minecraft. Выберите действие ниже.",
         reply_markup=main_keyboard,
     )
 
 
-@dp.message(F.text == "📋 Мои заказы")
+@dp.message(F.text == "Мои заказы")
 async def my_orders(message: Message):
-    orders = db.get_active_orders()
-    user_orders = [o for o in orders if o["user_id"] == message.from_user.id]
-    if not user_orders:
-        await message.answer("У тебя пока нет активных заказов.")
+    orders = db.get_user_orders(message.from_user.id)
+    if not orders:
+        await message.answer("У вас пока нет заказов.")
         return
 
-    text = "📋 Твои активные заказы:\n\n"
-    for o in user_orders:
-        text += f"• Заказ #{o['id']}\n  {o['description'][:200]}\n\n"
+    text = "Ваши заказы:\n\n"
+    for o in orders:
+        svc = SERVICES.get(o.get("service_type"), {"label": "Услуга", "price": ""})
+        created = str(o.get("created_at", ""))[:10]
+        status = "в работе" if o.get("status") == "active" else "завершён"
+        price = f"{svc['price']} руб." if svc.get("price") else ""
+        text += f"• #{o['id']} — {svc['label']} ({price})\n  📅 {created} · {status}\n\n"
     await message.answer(text)
 
 
-@dp.message(F.text == "🟣 Заказать скин")
+@dp.message(F.text == "Прайс-лист")
+async def price_list(message: Message):
+    text = f"Прайс-лист студии {STUDIO_NAME}:\n\n"
+    for svc in SERVICES.values():
+        text += (
+            f"• {svc['label']} — {svc['price']} руб.\n"
+            f"  {svc['desc']}\n\n"
+        )
+    text += "Для заказа нажмите «Заказать услугу»."
+    await message.answer(text)
+
+
+@dp.message(F.text == "Заказать услугу")
 async def start_order(message: Message, state: FSMContext):
     if db.get_order_by_user(message.from_user.id):
-        await message.answer("⚠️ У тебя уже есть активный заказ. Дождись его завершения.")
+        await message.answer("У вас уже есть активный заказ. Дождитесь его завершения.")
         return
 
-    await state.set_state(OrderStates.waiting_description)
+    await state.set_state(OrderStates.waiting_service)
     await message.answer(
-        "📝 Опиши скин, который хочешь:\n"
-        "— Персонаж / идея\n"
-        "— Стиль (классика, 3D, аниме и т.д.)\n"
-        "— Референсы можно прислать картинкой\n\n"
-        "Просто напиши описание сюда 👇"
+        "Выберите услугу:", reply_markup=service_keyboard
+    )
+
+
+@dp.callback_query(F.data.startswith("svc_"), OrderStates.waiting_service)
+async def choose_service(callback: CallbackQuery, state: FSMContext):
+    service_type = callback.data.split("_", 1)[1]
+    await state.update_data(service_type=service_type)
+    await state.set_state(OrderStates.waiting_description)
+    await callback.answer()
+    svc = SERVICES[service_type]
+    await callback.message.answer(
+        f"Отлично, вы выбрали «{svc['label']}» за {svc['price']} руб.\n\n"
+        "Теперь распишите, пожалуйста, максимально подробно, что вы хотите увидеть:\n"
+        "— Идея и концепция\n"
+        "— Детали и элементы\n"
+        "— Стиль и цветовая гамма\n"
+        "— Референсы (если есть, можно прикрепить фото)\n\n"
+        "Чем подробнее ТЗ — тем точнее будет результат."
+    )
+
+
+@dp.message(OrderStates.waiting_service)
+async def waiting_service_fallback(message: Message):
+    await message.answer(
+        "Выберите услугу кнопкой ниже.", reply_markup=service_keyboard
     )
 
 
 @dp.message(OrderStates.waiting_description)
 async def process_description(message: Message, state: FSMContext):
     user = message.from_user
+    data = await state.get_data()
+    service_type = data.get("service_type", "classic")
+    svc = SERVICES.get(service_type, SERVICES["classic"])
 
     topic = await bot.create_forum_topic(
         chat_id=GROUP_CHAT_ID,
-        name=f"Заказ | {user.first_name} (@{user.username or user.id})",
+        name=f"Заказ | {svc['short']} | {user.first_name} (@{user.username or user.id})",
         icon_color=0xCB86DB,
     )
     topic_id = topic.message_thread_id
@@ -107,6 +186,7 @@ async def process_description(message: Message, state: FSMContext):
     db.create_order(
         user_id=user.id,
         username=user.username or str(user.id),
+        service_type=service_type,
         description=description,
         topic_id=topic_id,
     )
@@ -115,9 +195,10 @@ async def process_description(message: Message, state: FSMContext):
         chat_id=GROUP_CHAT_ID,
         message_thread_id=topic_id,
         text=(
-            f"🆕 <b>Новый заказ!</b>\n\n"
-            f"👤 Заказчик: @{user.username or user.id}\n"
-            f"📝 Описание:\n{description}\n\n"
+            f"Новый заказ!\n\n"
+            f"Услуга: {svc['label']} ({svc['price']} руб.)\n"
+            f"Заказчик: @{user.username or user.id}\n"
+            f"ТЗ:\n{description}\n\n"
             f"Пишите сюда — я передам заказчику."
         ),
         reply_markup=close_button,
@@ -131,8 +212,8 @@ async def process_description(message: Message, state: FSMContext):
     )
 
     await message.answer(
-        "✅ Заказ создан! Скин-мейкер скоро ответит.\n"
-        "Пиши сюда — я передам сообщение в рабочий чат."
+        "Ваш заказ принят и передан команде. Ожидайте — скин-мейкер свяжется с вами в ближайшее время.\n"
+        "Если хотите что-то добавить, просто напишите сюда."
     )
     await state.clear()
 
@@ -154,7 +235,7 @@ async def finish_order(topic_id: int, by_user_id: int) -> None:
     try:
         await bot.send_message(
             chat_id=order["user_id"],
-            text="🎉 Твой заказ завершён! Спасибо за обращение.",
+            text="Ваш заказ завершён. Спасибо за обращение.",
         )
     except Exception:
         pass
@@ -165,7 +246,7 @@ async def finish_order(topic_id: int, by_user_id: int) -> None:
 async def close_order_cmd(message: Message):
     result = await finish_order(message.message_thread_id, message.from_user.id)
     if result is False:
-        await message.answer("⛔ Только админ/мейкер может завершить заказ.")
+        await message.answer("Только админ или мейкер может завершить заказ.")
     elif result is None:
         await message.answer("Заказ не найден.")
 
@@ -175,9 +256,9 @@ async def close_order_callback(callback: CallbackQuery):
     topic_id = callback.message.message_thread_id
     result = await finish_order(topic_id, callback.from_user.id)
     if result is True:
-        await callback.answer("Заказ завершён и очищен ✅")
+        await callback.answer("Заказ завершён и очищен.")
     elif result is False:
-        await callback.answer("⛔ Нет прав для завершения", show_alert=True)
+        await callback.answer("Нет прав для завершения", show_alert=True)
     else:
         await callback.answer("Заказ не найден", show_alert=True)
 
@@ -225,19 +306,51 @@ def health(request: web.Request) -> web.Response:
     return web.Response(text="ok")
 
 
-async def main() -> None:
+async def receive_order(request: web.Request) -> web.Response:
+    try:
+        data = await request.json()
+    except Exception:
+        return web.json_response({"ok": False, "error": "bad json"}, status=400)
+
+    name = str(data.get("name") or "").strip()
+    tg = str(data.get("telegram") or "").strip().lstrip("@")
+    service = data.get("service") or "classic"
+    desc = str(data.get("description") or "").strip()
+    ref = str(data.get("reference") or "").strip()
+
+    if not name or not tg or not desc:
+        return web.json_response({"ok": False, "error": "missing fields"}, status=400)
+
+    svc = SERVICES.get(service, SERVICES["classic"])
+    text = (
+        "🟣 Новая заявка с сайта!\n\n"
+        f"Услуга: {svc['label']} ({svc['price']} руб.)\n"
+        f"Имя: {name}\n"
+        f"Telegram: @{tg}\n"
+        f"ТЗ: {desc}\n"
+        + (f"Референс: {ref}\n" if ref else "")
+    )
+    try:
+        await bot.send_message(chat_id=GROUP_CHAT_ID, text=text)
+        return web.json_response({"ok": True})
+    except Exception as e:
+        logging.warning(f"Order submit failed: {e}")
+        return web.json_response({"ok": False, "error": "send failed"}, status=500)
+
+
+def main() -> None:
     if WEBHOOK_URL:
         logging.info("Бот запущен в webhook-режиме: %s", WEBHOOK_URL)
         app = web.Application()
-        app.add_routes([web.route("/", health), web.route("/health", health)])
+        app.add_routes([web.get("/", health), web.get("/health", health), web.post("/api/order", receive_order)])
         SimpleRequestHandler(dispatcher=dp, bot=bot).register(app, path=WEBHOOK_PATH)
         setup_application(app, dp, bot=bot)
         dp.startup.register(on_startup)
         web.run_app(app, host="0.0.0.0", port=PORT)
     else:
         logging.info("Бот запущен в режиме поллинга!")
-        await dp.start_polling(bot)
+        asyncio.run(dp.start_polling(bot))
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
