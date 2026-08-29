@@ -237,15 +237,27 @@ h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -.02em; }
 .calc__total { font-family: var(--m-display); font-weight: 700; font-size: 34px; color: var(--m-accent); }
 .calc__order { width: 100%; justify-content: center; }
 
-/* Team / makers reuse product-card */
+/* Team / makers */
 .section-sub { color: var(--m-fg-muted); font-size: 14px; margin: -6px 0 18px; }
-.product-card__social { display: flex; gap: 6px; flex-wrap: wrap; }
-.product-card__social a {
-  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+.team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.maker {
+  background: var(--m-surface); border: 1px solid var(--m-border); border-radius: 16px; padding: 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+}
+.maker__avatar {
+  width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex: none;
+  display: inline-flex; background: linear-gradient(135deg, #2a2140, #34294d); margin-bottom: 4px;
+}
+.maker__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.maker__name { margin: 0; font-size: 16px; font-weight: 700; font-family: var(--m-display); }
+.maker__role { font-size: 12.5px; color: var(--m-fg-muted); }
+.maker__links { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; justify-content: center; }
+.maker__links a {
+  font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
   border: 1px solid var(--m-border); color: var(--m-fg-muted);
   transition: border-color var(--m-t-base), color var(--m-t-base);
 }
-.product-card__social a:hover { border-color: var(--m-accent); color: var(--m-accent); }
+.maker__links a:hover { border-color: var(--m-accent); color: var(--m-accent); }
 
 /* Final CTA order buttons */
 .final-card__cta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; position: relative; }
