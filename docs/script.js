@@ -130,5 +130,5 @@
     grid.addEventListener('mousemove', onMove);
     grid.addEventListener('mouseleave', reset);
   }
-  document.querySelectorAll('.product-grid').forEach(bindGridDistance);
+  document.querySelectorAll('.team').forEach(bindGridDistance);
 })();
