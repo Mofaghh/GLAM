@@ -94,7 +94,40 @@ close_button = InlineKeyboardMarkup(
 
 
 @dp.message(CommandStart())
-async def cmd_start(message: Message):
+async def cmd_start(message: Message, state: FSMContext):
+    payload = ""
+    if message.text and message.text.startswith("/start"):
+        payload = message.text[len("/start"):].strip()
+
+    if payload.startswith("calc_"):
+        try:
+            parts = payload.split("_")
+            base = parts[1] if len(parts) > 1 else "classic"
+            adds = parts[2:] if len(parts) > 2 else []
+            svc = SERVICES.get(base, SERVICES["classic"])
+            lines = [f"• {svc['label']} — {svc['price']} руб."]
+            total = svc["price"]
+            for a in adds:
+                if a in SERVICES:
+                    lines.append(f"• {SERVICES[a]['label']} — {SERVICES[a]['price']} руб.")
+                    total += SERVICES[a]["price"]
+                elif a == "cape":
+                    lines.append("• Плащ — 99 руб.")
+                    total += 99
+            if db.get_order_by_user(message.from_user.id):
+                await message.answer("У вас уже есть активный заказ. Дождитесь его завершения.")
+                return
+            await state.set_state(OrderStates.waiting_description)
+            await state.update_data(service_type=base, addons=adds)
+            await message.answer(
+                "Вы собрали заказ на сайте:\n" + "\n".join(lines) +
+                f"\n\nИтого: {total} руб.\n\nОсталось только описать, что вы хотите — "
+                "идея, детали, стиль и референсы (можно прикрепить фото). Чем подробнее ТЗ — тем точнее результат.",
+            )
+            return
+        except Exception as e:
+            logging.warning(f"calc deep link parse failed: {e}")
+
     await message.answer(
         f"Добро пожаловать в студию {STUDIO_NAME}.\n"
         "Мы создаём уникальные скины для Minecraft. Выберите действие ниже.",

@@ -83,6 +83,139 @@
       </div>
     </section>
 
+    <section class="section" id="calc">
+      <div class="wrap">
+        <h2 class="section-title">Собери заказ</h2>
+        <div class="calc">
+          <div class="calc__main">
+            <div class="calc__group">
+              <span class="calc__label">База</span>
+              <div class="calc__options" role="radiogroup" aria-label="База">
+                <button type="button" class="calc__opt is-active" role="radio" aria-checked="true" data-calc-base data-id="premium" data-price="349">
+                  <span class="calc__opt-name">Премиум скин</span>
+                  <span class="calc__opt-price">349 ₽</span>
+                </button>
+                <button type="button" class="calc__opt" role="radio" aria-checked="false" data-calc-base data-id="classic" data-price="149">
+                  <span class="calc__opt-name">Обычный скин</span>
+                  <span class="calc__opt-price">149 ₽</span>
+                </button>
+                <button type="button" class="calc__opt" role="radio" aria-checked="false" data-calc-base data-id="reshade" data-price="89">
+                  <span class="calc__opt-name">Решейд скина</span>
+                  <span class="calc__opt-price">89 ₽</span>
+                </button>
+              </div>
+            </div>
+            <div class="calc__group">
+              <span class="calc__label">Дополнения</span>
+              <div class="calc__options">
+                <button type="button" class="calc__opt calc__opt--add" aria-pressed="false" data-calc-add data-id="clothes" data-price="119">
+                  <span class="calc__opt-name">Одежда на скин</span>
+                  <span class="calc__opt-price">+119 ₽</span>
+                </button>
+                <button type="button" class="calc__opt calc__opt--add" aria-pressed="false" data-calc-add data-id="cape" data-price="99">
+                  <span class="calc__opt-name">Плащ</span>
+                  <span class="calc__opt-price">+99 ₽</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <aside class="calc__summary">
+            <span class="calc__total-label">Итого</span>
+            <span class="calc__total" id="calcTotal">349 ₽</span>
+            <a class="banner-card banner-card--primary calc__order" id="calcOrder" href="https://t.me/GLAAAM_BOT">Оформить заказ</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">Отзывы игроков</h2>
+        <div class="reviews">
+          <article class="review">
+            <header class="review__head">
+              <span class="review__avatar" style="--a:#a855f7">MK</span>
+              <span class="review__who">
+                <span class="review__name">@minecraft_king</span>
+                <span class="review__plat">Telegram</span>
+              </span>
+              <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            </header>
+            <p class="review__text">Заказал премиум скин по фото — прислали за день, всё чётко. Ребята реально рисуют, не слив. Рекомендую.</p>
+          </article>
+          <article class="review">
+            <header class="review__head">
+              <span class="review__avatar" style="--a:#8b5cf6">DV</span>
+              <span class="review__who">
+                <span class="review__name">@darkvoid_</span>
+                <span class="review__plat">Discord</span>
+              </span>
+              <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            </header>
+            <p class="review__text">Брал обычный скин и одежду отдельно. Цена адекватная, результат даже круче рефа. Буду ещё.</p>
+          </article>
+          <article class="review">
+            <header class="review__head">
+              <span class="review__avatar" style="--a:#a855f7">SL</span>
+              <span class="review__who">
+                <span class="review__name">@steve_life</span>
+                <span class="review__plat">VK</span>
+              </span>
+              <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            </header>
+            <p class="review__text">Решейд старого скина — не узнал, но в лучшую сторону. Поддержка отвечает быстро, всё по-человечески.</p>
+          </article>
+          <article class="review">
+            <header class="review__head">
+              <span class="review__avatar" style="--a:#8b5cf6">NB</span>
+              <span class="review__who">
+                <span class="review__name">@nightbloom</span>
+                <span class="review__plat">Telegram</span>
+              </span>
+              <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            </header>
+            <p class="review__text">Заказали скин для клана всем в одном стиле. Сделали за два дня, выглядит монолитно. Уважаю.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">Мейкеры студии</h2>
+        <p class="section-sub">На тарифе «Премиум» над скином работает вся студия. Познакомься с художниками.</p>
+        <div class="team">
+          <article class="maker">
+            <span class="maker__avatar" style="--a:#a855f7">A</span>
+            <h3 class="maker__name">Алиса</h3>
+            <span class="maker__role">Лид-мейкер</span>
+            <div class="maker__links">
+              <a href="#" target="_blank" rel="noopener">ArtStation</a>
+              <a href="#" target="_blank" rel="noopener">Twitter</a>
+            </div>
+          </article>
+          <article class="maker">
+            <span class="maker__avatar" style="--a:#8b5cf6">K</span>
+            <h3 class="maker__name">Кирилл</h3>
+            <span class="maker__role">Мейкер</span>
+            <div class="maker__links">
+              <a href="#" target="_blank" rel="noopener">ArtStation</a>
+              <a href="#" target="_blank" rel="noopener">Behance</a>
+            </div>
+          </article>
+          <article class="maker">
+            <span class="maker__avatar" style="--a:#a855f7">M</span>
+            <h3 class="maker__name">Мира</h3>
+            <span class="maker__role">Мейкер</span>
+            <div class="maker__links">
+              <a href="#" target="_blank" rel="noopener">Twitter</a>
+              <a href="#" target="_blank" rel="noopener">Behance</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="wrap">
         <h2 class="section-title">Свежие работы</h2>
@@ -109,6 +242,10 @@
           <div class="final-card__bg" aria-hidden="true"></div>
           <h2 class="final-card__heading">Готов? Начнём с твоей идеи</h2>
           <p class="final-card__caption">Опиши образ или пришли референс — остальное сделает художник.</p>
+          <div class="final-card__cta">
+            <a href="https://t.me/GLAAAM_BOT" target="_blank" rel="noopener" class="banner-card banner-card--primary">Оформить заказ в Telegram-боте</a>
+            <a href="#" target="_blank" rel="noopener" class="banner-card banner-card--vk">Написать ВКонтакте</a>
+          </div>
         </div>
       </div>
     </section>
