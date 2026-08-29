@@ -103,32 +103,4 @@
   });
   calcLoad();
   calcUpdate();
-
-  // Distance-based card hover: card near cursor comes forward, far recedes
-  function bindGridDistance(grid) {
-    var cards = grid.querySelectorAll('.product-card');
-    if (!cards.length) return;
-    function onMove(e) {
-      var rect = grid.getBoundingClientRect();
-      var gx = e.clientX - rect.left, gy = e.clientY - rect.top;
-      cards.forEach(function (c) {
-        var cr = c.getBoundingClientRect();
-        var cx = cr.left - rect.left + cr.width / 2;
-        var cy = cr.top - rect.top + cr.height / 2;
-        var d = Math.hypot(gx - cx, gy - cy);
-        var f = Math.max(0, 1 - d / (rect.width * 0.85 + rect.height * 0.45));
-        var scale = 0.9 + 0.16 * f;
-        c.style.transform = 'translateY(' + (-10 * f).toFixed(1) + 'px) scale(' + scale.toFixed(3) + ')';
-        c.style.opacity = (0.45 + 0.55 * f).toFixed(3);
-        c.style.filter = 'brightness(' + (0.6 + 0.4 * f).toFixed(3) + ')';
-        c.style.zIndex = f > 0.6 ? 3 : '';
-      });
-    }
-    function reset() {
-      cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.filter = ''; c.style.zIndex = ''; });
-    }
-    grid.addEventListener('mousemove', onMove);
-    grid.addEventListener('mouseleave', reset);
-  }
-  document.querySelectorAll('.team').forEach(bindGridDistance);
 })();
