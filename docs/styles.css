@@ -253,14 +253,6 @@ h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -.02em; }
 .maker__image.img-missing { visibility: hidden; }
 .maker__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .maker__name { margin: 0; font-size: 16px; font-weight: 700; font-family: var(--m-display); }
-.maker__role { font-size: 12.5px; color: var(--m-fg-muted); }
-.maker__links { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; justify-content: center; }
-.maker__links a {
-  font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
-  border: 1px solid var(--m-border); color: var(--m-fg-muted);
-  transition: border-color var(--m-t-base), color var(--m-t-base);
-}
-.maker__links a:hover { border-color: var(--m-accent); color: var(--m-accent); }
 
 /* Final CTA order buttons */
 .final-card__cta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; position: relative; }
